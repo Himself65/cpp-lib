@@ -1,0 +1,22 @@
+name: CI
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Build
+      run: |
+        cmake .
+        cmake --build . --config Debug
+        
+    - name: Test
+      run: cd tests && ctest -C Debug
+      
