@@ -35,7 +35,7 @@ std::string SPrintFImpl(
 
 template<typename... Args>
 std::string SPrintF(const char *format, Args &&... args) {
-  return SPrintFImpl(format, std::forward()<Args>(args)...)
+  return SPrintFImpl(format, std::forward<Args>(args)...)
 }
 
 std::string SPrintF(const char *format) {
