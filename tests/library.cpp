@@ -9,3 +9,7 @@ TEST(sample_test_case, sample_test) {
 TEST(sample_test_case, hellp_test) {
   EXPECT_EQ(hello(), "hello");
 }
+
+TEST(sprintf_test_case, base_test) {
+  EXPECT_EQ(SPrintF("foo"), "foo");
+}
