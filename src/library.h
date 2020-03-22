@@ -1,6 +1,7 @@
 #ifndef BREAD_TEST_LIBRARY_H
 #define BREAD_TEST_LIBRARY_H
 
+#include <cstring>
 #include <stdexcept>
 #include <string>
 #include <iostream>
