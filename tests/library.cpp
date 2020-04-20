@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include <vector>
 #include "library.h"
 
@@ -20,4 +21,19 @@ TEST(vector_test_case, base_test) {
   my_vector.push_back(2);
   my_vector.push_back(3);
   EXPECT_EQ(my_vector.size(), 3);
+}
+
+TEST(shared_ptr_test_case, base_test) {
+  using std::string, std::shared_ptr, std::make_shared;
+  auto *s1 = new string("foo");
+  auto p1 = shared_ptr<string>(s1, [&](string *p) {
+    EXPECT_TRUE(*p == string("called"));
+    delete p;
+    s1 = nullptr;
+  });
+  auto p2 = make_shared<string>("goo");
+
+  *p1 = "called";
+  p1 = p2;
+  EXPECT_EQ(s1, nullptr);
 }
