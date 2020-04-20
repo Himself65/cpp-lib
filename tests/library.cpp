@@ -37,3 +37,29 @@ TEST(shared_ptr_test_case, base_test) {
   p1 = p2;
   EXPECT_EQ(s1, nullptr);
 }
+
+TEST(class_foo_test_case, base_test) {
+  using std::move;
+  Foo a = Foo(1);
+  Foo &&b = move(a);
+  EXPECT_EQ(a.number, b.number);
+  a.number = 2;
+  EXPECT_EQ(a.number, b.number);
+}
+
+TEST(class_foo_test_case, base_test_1) {
+  using std::move;
+  Foo a = Foo(1);
+  // pass
+  const Foo &&b = Foo(1);
+  // fail
+  //  const Foo&& c = a;
+  auto fn = [](Foo&& foo) {
+    return foo.number++, foo;
+  };
+  auto d = fn(move(a));
+  EXPECT_EQ(a.number, 2);
+  EXPECT_EQ(d.number, 2);
+  auto e = fn(Foo(1));
+  EXPECT_EQ(d.number, 2);
+}

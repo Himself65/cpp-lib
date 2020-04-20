@@ -6,8 +6,16 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include <utility>
 
 std::string hello();
+
+class Foo {
+public:
+  Foo(int number) : number(number) {};
+
+  int number;
+};
 
 template<typename... Args>
 std::string SPrintF(const char *format, Args &&... args);
