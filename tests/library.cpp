@@ -54,7 +54,7 @@ TEST(class_foo_test_case, base_test_1) {
   const Foo &&b = Foo(1);
   // fail
   //  const Foo&& c = a;
-  auto fn = [](Foo&& foo) {
+  auto fn = [](Foo &&foo) {
     return foo.number++, foo;
   };
   auto d = fn(move(a));
@@ -63,3 +63,23 @@ TEST(class_foo_test_case, base_test_1) {
   auto e = fn(Foo(1));
   EXPECT_EQ(d.number, 2);
 }
+
+
+#define FOO(a, b, ...)                                                        \
+  do {                                                                        \
+    if (a > b) a = b;                                                         \
+    else b = a;                                                               \
+  } while (0);
+
+TEST(macro_test, base_test) {
+  auto fn = []() {
+    auto a = 1;
+    auto b = 2;
+    FOO(a, b, a = 3);
+    EXPECT_EQ(a, 1);
+    EXPECT_EQ(b, 1);
+  };
+  fn();
+}
+
+#undef FOO
