@@ -83,3 +83,24 @@ TEST(macro_test, base_test) {
 }
 
 #undef FOO
+
+#define OP(name, operator) int name (int a, int b) { return a operator b; }
+
+OP(add, +)
+
+OP(sub, -)
+
+OP(mul, *)
+
+OP(division, /)
+
+#undef OP
+#define PRE func['+'] = add; func['-'] = sub; func['*'] = mul; func['/'] = division;
+TEST(test_macro, func_test) {
+  int (*func[256])(int, int);
+  PRE;
+  EXPECT_EQ(func['+'](1, 2), 3);
+  EXPECT_EQ(func['-'](1, 2), -1);
+  EXPECT_EQ(func['/'](6, 2), 3);
+  EXPECT_EQ(func['*'](6, 2), 12);
+}
