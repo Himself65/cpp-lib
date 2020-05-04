@@ -7,7 +7,8 @@
 #include <iostream>
 #include <memory>
 #include <utility>
-
+static int static_foo = 2;
+int get_library_foo();
 std::string hello();
 
 class Foo {

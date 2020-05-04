@@ -1,5 +1,9 @@
 #include "library.h"
 
+int get_library_foo() {
+  return static_foo;
+}
+
 std::string hello() {
   return std::string("hello");
 }

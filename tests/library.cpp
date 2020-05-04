@@ -114,3 +114,14 @@ TEST(test_static, test) {
   EXPECT_EQ(foo(), 1);
   EXPECT_EQ(foo(), 2);
 }
+
+TEST(test_static, test_static_foo) {
+  EXPECT_EQ(get_library_foo(), 2);
+}
+
+TEST(test_plus, test) {
+  int a = 0, b = 0;
+  ++a = b++;
+  EXPECT_EQ(a, 0);
+  EXPECT_EQ(b, 1);
+}
