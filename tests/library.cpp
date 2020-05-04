@@ -104,3 +104,13 @@ TEST(test_macro, func_test) {
   EXPECT_EQ(func['/'](6, 2), 3);
   EXPECT_EQ(func['*'](6, 2), 12);
 }
+
+int foo() {
+  static int i = 0;
+  return i += 1;
+}
+
+TEST(test_static, test) {
+  EXPECT_EQ(foo(), 1);
+  EXPECT_EQ(foo(), 2);
+}
