@@ -125,3 +125,17 @@ TEST(test_plus, test) {
   EXPECT_EQ(a, 0);
   EXPECT_EQ(b, 1);
 }
+
+TEST(run_for_each, test) {
+  char strs[2][256] = {
+      "123",
+      "234"
+  };
+  for (auto str : strs) {
+    int pos = 0;
+    while (str[pos] != '\0') {
+      std::cout << str[pos++];
+    }
+    std::cout << std::endl;
+  }
+}
